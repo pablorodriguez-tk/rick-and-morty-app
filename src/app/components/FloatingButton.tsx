@@ -1,3 +1,5 @@
+'use client';
+
 interface FloatingButtonProps {
   onClick: () => void;
   icon: React.ReactNode;

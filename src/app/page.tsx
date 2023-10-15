@@ -1,10 +1,10 @@
 'use client';
 
 import { GET_CHARACTER } from './services/graphql/query/getCharacter';
-import { Pagination } from 'flowbite-react';
+import { Button, Pagination } from 'flowbite-react';
 import { useGlobalContext } from './context/store';
 import { useLazyQuery } from '@apollo/client';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import ArrowUpIcon from './svg/ArrowUpIcon';
 import CharacterList from './components/CharacterList';
 import EpisodeTable from './components/EpisodeTable';
@@ -82,9 +82,31 @@ export default function Home() {
   }, [episodesList1?.character.episode, episodesList2?.character.episode]);
 
   const showList =
+    selectedCharacters.character1?.id &&
+    selectedCharacters.character2?.id &&
     episodesList1?.character.episode &&
     episodesList2?.character.episode &&
     sharedEpisodes;
+
+  const onResetButtonClick = () => {
+    setSelectedCharacters({
+      character1: null,
+      character2: null,
+    });
+    setSearch1('');
+    setSearch2('');
+    setPage1(1);
+    setPage2(1);
+  };
+
+  useEffect(() => {
+    if (
+      selectedCharacters.character1 !== null &&
+      selectedCharacters.character2 !== null
+    ) {
+      window.scrollTo(0, 0);
+    }
+  }, [selectedCharacters]);
 
   return (
     <main
@@ -188,6 +210,14 @@ export default function Home() {
         }}
         icon={<ArrowUpIcon />}
       />
+      <Button
+        gradientDuoTone="greenToBlue"
+        outline
+        className="absolute top-4 left-1/2 transform -translate-x-1/2"
+        onClick={onResetButtonClick}
+      >
+        <p>Reset</p>
+      </Button>
     </main>
   );
 }

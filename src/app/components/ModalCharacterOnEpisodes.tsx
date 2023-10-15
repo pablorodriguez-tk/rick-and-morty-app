@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, Modal } from 'flowbite-react';
 import type { IEpisodeResponse } from '../interfaces/episode';
 import Image from 'next/image';
