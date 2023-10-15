@@ -1,11 +1,13 @@
 'use client';
 
-import { useQuery } from '@apollo/client';
-import type { ICharacters, ICharactersResponse } from './interfaces/characters';
-import { GET_CHARACTERS } from './services/graphql/query/getCaracters';
-import CharacterList from './components/CharacterList';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { useGlobalContext } from './context/store';
+import { GET_CHARACTERS } from './services/graphql/query/getCaracters';
+import { GET_CHARACTER } from './services/graphql/query/getCharacter';
 import Title from './components/Title';
+import CharacterList from './components/CharacterList';
+import type { ICharacters, ICharactersResponse } from './interfaces/characters';
+import type { ICharacter } from './interfaces/character';
 
 export default function Home() {
   const { selectedCharacters, setSelectedCharacters } = useGlobalContext();
@@ -16,11 +18,26 @@ export default function Home() {
   const { data: characterList2, loading: characterList2Loading } =
     useQuery<ICharactersResponse>(GET_CHARACTERS); //TODO: Add pagination and filter by name
 
+  const [getCharacterEpisodes1, { data: episodesList1 }] =
+    useLazyQuery<ICharacter>(GET_CHARACTER, {
+      variables: { characterId: selectedCharacters.character1?.id },
+    });
+
+  const [getCharacterEpisodes2, { data: episodesList2 }] =
+    useLazyQuery<ICharacter>(GET_CHARACTER, {
+      variables: { characterId: selectedCharacters.character1?.id },
+    });
+
   const onCharacter1Click = (character: ICharacters) => {
     setSelectedCharacters((prev) => ({
       ...prev,
       character1: character,
     }));
+    getCharacterEpisodes1({
+      variables: {
+        characterId: character.id,
+      },
+    });
   };
 
   const onCharacter2Click = (character: ICharacters) => {
@@ -28,6 +45,11 @@ export default function Home() {
       ...prev,
       character2: character,
     }));
+    getCharacterEpisodes2({
+      variables: {
+        characterId: character.id,
+      },
+    });
   };
 
   return (
@@ -58,6 +80,10 @@ export default function Home() {
           />
         </div>
       </div>
+      {/* TODO: Add episodes list */}
+      {JSON.stringify(episodesList1, null, 2)}
+      <div>----------------</div>
+      {JSON.stringify(episodesList2, null, 2)}
     </main>
   );
 }

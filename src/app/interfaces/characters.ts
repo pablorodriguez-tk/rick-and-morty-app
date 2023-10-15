@@ -3,11 +3,11 @@ export interface ICharactersResponse {
 }
 
 export interface Characters {
-  info: Info;
+  info: IInfo;
   results: ICharacters[];
 }
 
-export interface Info {
+export interface IInfo {
   count: number;
   pages: number;
   prev: number;
