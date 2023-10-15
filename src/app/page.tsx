@@ -7,24 +7,26 @@ import { GET_CHARACTER } from './services/graphql/query/getCharacter';
 import Title from './components/Title';
 import CharacterList from './components/CharacterList';
 import type { ICharacters, ICharactersResponse } from './interfaces/characters';
-import type { ICharacter } from './interfaces/character';
+import type { ICharacterResponse } from './interfaces/character';
+import EpisodeTable from './components/EpisodeTable';
+import { useMemo } from 'react';
 
 export default function Home() {
   const { selectedCharacters, setSelectedCharacters } = useGlobalContext();
 
   const { data: characterList1, loading: characterList1Loading } =
-    useQuery<ICharactersResponse>(GET_CHARACTERS); //TODO: Add pagination and filter by name
+    useQuery<ICharactersResponse>(GET_CHARACTERS); // TODO: Add pagination and filter by name
 
   const { data: characterList2, loading: characterList2Loading } =
-    useQuery<ICharactersResponse>(GET_CHARACTERS); //TODO: Add pagination and filter by name
+    useQuery<ICharactersResponse>(GET_CHARACTERS); // TODO: Add pagination and filter by name
 
   const [getCharacterEpisodes1, { data: episodesList1 }] =
-    useLazyQuery<ICharacter>(GET_CHARACTER, {
+    useLazyQuery<ICharacterResponse>(GET_CHARACTER, {
       variables: { characterId: selectedCharacters.character1?.id },
     });
 
   const [getCharacterEpisodes2, { data: episodesList2 }] =
-    useLazyQuery<ICharacter>(GET_CHARACTER, {
+    useLazyQuery<ICharacterResponse>(GET_CHARACTER, {
       variables: { characterId: selectedCharacters.character1?.id },
     });
 
@@ -51,6 +53,19 @@ export default function Home() {
       },
     });
   };
+
+  const sharedEpisodes = useMemo(() => {
+    return episodesList1?.character.episode.filter((episode) => {
+      return episodesList2?.character.episode.some((episode2) => {
+        return episode.id === episode2.id;
+      });
+    });
+  }, [episodesList1?.character.episode, episodesList2?.character.episode]);
+
+  const showList =
+    episodesList1?.character.episode &&
+    episodesList2?.character.episode &&
+    sharedEpisodes;
 
   return (
     <main className="">
@@ -80,10 +95,36 @@ export default function Home() {
           />
         </div>
       </div>
-      {/* TODO: Add episodes list */}
-      {JSON.stringify(episodesList1, null, 2)}
-      <div>----------------</div>
-      {JSON.stringify(episodesList2, null, 2)}
+      {showList && (
+        <>
+          <div className="flex flex-row h-1/3 w-full p-4 gap-3">
+            <EpisodeTable
+              episodeList={episodesList1?.character.episode}
+              title={selectedCharacters?.character1?.name}
+              secondaryTitle="Only Episodes"
+              onClick={(id) => {
+                console.log(id); // TODO: add modal to show character list on episode
+              }}
+            />
+            <EpisodeTable
+              episodeList={sharedEpisodes}
+              title={`${selectedCharacters?.character1?.name} & ${selectedCharacters?.character2?.name}`}
+              secondaryTitle="Shared Episodes"
+              onClick={(id) => {
+                console.log(id); // TODO: add modal to show character list on episode
+              }}
+            />
+            <EpisodeTable
+              episodeList={episodesList2?.character.episode}
+              title={selectedCharacters?.character2?.name}
+              secondaryTitle="Only Episodes"
+              onClick={(id) => {
+                console.log(id); // TODO: add modal to show character list on episode
+              }}
+            />
+          </div>
+        </>
+      )}
     </main>
   );
 }
