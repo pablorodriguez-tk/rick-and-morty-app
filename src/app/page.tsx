@@ -1,30 +1,43 @@
 'use client';
 
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { useGlobalContext } from './context/store';
-import { GET_CHARACTERS } from './services/graphql/query/getCaracters';
 import { GET_CHARACTER } from './services/graphql/query/getCharacter';
-import Title from './components/Title';
-import CharacterList from './components/CharacterList';
-import type { ICharacters, ICharactersResponse } from './interfaces/characters';
-import type { ICharacterResponse } from './interfaces/character';
-import EpisodeTable from './components/EpisodeTable';
+import { Pagination } from 'flowbite-react';
+import { useGlobalContext } from './context/store';
+import { useLazyQuery } from '@apollo/client';
 import { useMemo } from 'react';
-import FloatingButton from './components/FloatingButton';
 import ArrowUpIcon from './svg/ArrowUpIcon';
+import CharacterList from './components/CharacterList';
+import EpisodeTable from './components/EpisodeTable';
+import FloatingButton from './components/FloatingButton';
 import ModalCharacterOnEpisodes from './components/ModalCharacterOnEpisodes';
+import Search from './components/Search';
+import Title from './components/Title';
+import type { ICharacterResponse } from './interfaces/character';
+import type { ICharacters } from './interfaces/characters';
+import useGetCharacters from './hooks/useGetCharacters';
 import useGetEpisode from './hooks/useGetEpisode';
 
 export default function Home() {
   const { selectedCharacters, setSelectedCharacters } = useGlobalContext();
   const { openModal, setOpenModal, charactersInEpisode, onClickGetEpisode } =
     useGetEpisode();
+  const {
+    data: characterList1,
+    loading: characterList1Loading,
+    page: page1,
+    search: search1,
+    setSearch: setSearch1,
+    setPage: setPage1,
+  } = useGetCharacters();
 
-  const { data: characterList1, loading: characterList1Loading } =
-    useQuery<ICharactersResponse>(GET_CHARACTERS); // TODO: Add pagination and filter by name
-
-  const { data: characterList2, loading: characterList2Loading } =
-    useQuery<ICharactersResponse>(GET_CHARACTERS); // TODO: Add pagination and filter by name
+  const {
+    data: characterList2,
+    loading: characterList2Loading,
+    page: page2,
+    search: search2,
+    setSearch: setSearch2,
+    setPage: setPage2,
+  } = useGetCharacters();
 
   const [getCharacterEpisodes1, { data: episodesList1 }] =
     useLazyQuery<ICharacterResponse>(GET_CHARACTER, {
@@ -88,17 +101,40 @@ export default function Home() {
             title={selectedCharacters?.character1?.name ?? 'Character #1'}
             position="left"
           />
+          <Search
+            initialValue={search1}
+            onChange={(e) => {
+              setSearch1(e.target.value);
+              setPage1(1);
+            }}
+          />
           <CharacterList
             characters={characterList1?.characters.results}
             loading={characterList1Loading}
             onClick={onCharacter1Click}
             selectedCharacterId={selectedCharacters.character1?.id}
           />
+          <div className="flex items-center justify-center text-center">
+            <Pagination
+              currentPage={page1}
+              totalPages={characterList1?.characters.info.pages ?? 0}
+              onPageChange={(page) => {
+                setPage1(page);
+              }}
+            />
+          </div>
         </div>
         <div className="flex flex-col w-1/2 p-4">
           <Title
             title={selectedCharacters?.character2?.name ?? 'Character #2'}
             position="right"
+          />
+          <Search
+            initialValue={search2}
+            onChange={(e) => {
+              setSearch2(e.target.value);
+              setPage2(1);
+            }}
           />
           <CharacterList
             characters={characterList2?.characters.results}
@@ -106,6 +142,15 @@ export default function Home() {
             onClick={onCharacter2Click}
             selectedCharacterId={selectedCharacters.character2?.id}
           />
+          <div className="flex items-center justify-center text-center">
+            <Pagination
+              currentPage={page2}
+              totalPages={characterList2?.characters.info.pages ?? 0}
+              onPageChange={(page) => {
+                setPage2(page);
+              }}
+            />
+          </div>
         </div>
       </div>
       <ModalCharacterOnEpisodes

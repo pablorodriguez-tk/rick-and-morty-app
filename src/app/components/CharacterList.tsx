@@ -27,6 +27,17 @@ const CharacterList = ({
     );
   }
 
+  if (characters?.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center h-full">
+        <h1 className="text-2xl text-gray-700 dark:text-gray-300">
+          No results found :(
+        </h1>
+        <p>Try again</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 grid-cols-1 overflow-auto m-2 gap-1">
       {characters?.map((character) => (
