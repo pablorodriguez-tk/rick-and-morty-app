@@ -31,7 +31,7 @@ const EpisodeTable = ({
                   onClick?.(id);
                 }}
                 key={`table1-${id}`}
-                className="bg-white dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
+                className="bg-white dark:border-gray-700 dark:bg-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <Table.Cell>
                   <b>{episode}</b> - {name} - {airDate}

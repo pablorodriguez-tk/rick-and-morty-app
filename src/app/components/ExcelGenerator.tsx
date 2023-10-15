@@ -16,7 +16,6 @@ const ExcelGenerator = ({
     for (let i = 0; i < data.length; i++) {
       const ws = XLSX.utils.json_to_sheet(data[i]);
 
-      console.log(sheetName[i]);
       XLSX.utils.book_append_sheet(
         wb,
         ws,
