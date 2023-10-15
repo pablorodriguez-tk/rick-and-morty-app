@@ -12,9 +12,13 @@ import EpisodeTable from './components/EpisodeTable';
 import { useMemo } from 'react';
 import FloatingButton from './components/FloatingButton';
 import ArrowUpIcon from './svg/ArrowUpIcon';
+import ModalCharacterOnEpisodes from './components/ModalCharacterOnEpisodes';
+import useGetEpisode from './hooks/useGetEpisode';
 
 export default function Home() {
   const { selectedCharacters, setSelectedCharacters } = useGlobalContext();
+  const { openModal, setOpenModal, charactersInEpisode, onClickGetEpisode } =
+    useGetEpisode();
 
   const { data: characterList1, loading: characterList1Loading } =
     useQuery<ICharactersResponse>(GET_CHARACTERS); // TODO: Add pagination and filter by name
@@ -104,6 +108,11 @@ export default function Home() {
           />
         </div>
       </div>
+      <ModalCharacterOnEpisodes
+        open={openModal}
+        setOpenModal={setOpenModal}
+        characters={charactersInEpisode}
+      />
       {showList && (
         <>
           <div className="flex flex-row h-1/3 w-full p-4 gap-3">
@@ -111,25 +120,19 @@ export default function Home() {
               episodeList={episodesList1?.character.episode}
               title={selectedCharacters?.character1?.name}
               secondaryTitle="Only Episodes"
-              onClick={(id) => {
-                console.log(id); // TODO: add modal to show character list on episode
-              }}
+              onClick={onClickGetEpisode}
             />
             <EpisodeTable
               episodeList={sharedEpisodes}
               title={`${selectedCharacters?.character1?.name} & ${selectedCharacters?.character2?.name}`}
               secondaryTitle="Shared Episodes"
-              onClick={(id) => {
-                console.log(id); // TODO: add modal to show character list on episode
-              }}
+              onClick={onClickGetEpisode}
             />
             <EpisodeTable
               episodeList={episodesList2?.character.episode}
               title={selectedCharacters?.character2?.name}
               secondaryTitle="Only Episodes"
-              onClick={(id) => {
-                console.log(id); // TODO: add modal to show character list on episode
-              }}
+              onClick={onClickGetEpisode}
             />
           </div>
         </>
