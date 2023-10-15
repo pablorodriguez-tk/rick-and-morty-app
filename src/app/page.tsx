@@ -10,6 +10,8 @@ import type { ICharacters, ICharactersResponse } from './interfaces/characters';
 import type { ICharacterResponse } from './interfaces/character';
 import EpisodeTable from './components/EpisodeTable';
 import { useMemo } from 'react';
+import FloatingButton from './components/FloatingButton';
+import ArrowUpIcon from './svg/ArrowUpIcon';
 
 export default function Home() {
   const { selectedCharacters, setSelectedCharacters } = useGlobalContext();
@@ -68,7 +70,14 @@ export default function Home() {
     sharedEpisodes;
 
   return (
-    <main className="">
+    <main
+      className={`${
+        selectedCharacters.character1 !== null &&
+        selectedCharacters.character2 !== null
+          ? 'h-screen'
+          : 'h-full'
+      }`}
+    >
       <div className="flex flex-row h-2/3">
         <div className="flex flex-col w-1/2 p-4">
           <Title
@@ -125,6 +134,12 @@ export default function Home() {
           </div>
         </>
       )}
+      <FloatingButton
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
+        icon={<ArrowUpIcon />}
+      />
     </main>
   );
 }
