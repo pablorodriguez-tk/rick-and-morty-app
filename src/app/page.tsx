@@ -16,6 +16,7 @@ import type { ICharacterResponse } from './interfaces/character';
 import type { ICharacters } from './interfaces/characters';
 import useGetCharacters from './hooks/useGetCharacters';
 import useGetEpisode from './hooks/useGetEpisode';
+import ExcelGenerator from './components/ExcelGenerator';
 
 export default function Home() {
   const { selectedCharacters, setSelectedCharacters } = useGlobalContext();
@@ -182,6 +183,23 @@ export default function Home() {
       />
       {showList && (
         <>
+          <div className="flex justify-center">
+            <ExcelGenerator
+              data={[
+                episodesList1?.character.episode ?? [],
+                sharedEpisodes ?? [],
+                episodesList2?.character.episode ?? [],
+              ]}
+              fileName={`${selectedCharacters.character1?.name}_&_${selectedCharacters.character2?.name}`}
+              sheetName={[
+                selectedCharacters.character1?.name,
+                selectedCharacters.character1?.name +
+                  ' & ' +
+                  selectedCharacters.character1?.name,
+                selectedCharacters.character2?.name,
+              ]}
+            />
+          </div>
           <div className="flex flex-row h-1/3 w-full p-4 gap-3">
             <EpisodeTable
               episodeList={episodesList1?.character.episode}
@@ -205,6 +223,7 @@ export default function Home() {
         </>
       )}
       <FloatingButton
+        className="text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
         onClick={() => {
           window.scrollTo(0, 0);
         }}
