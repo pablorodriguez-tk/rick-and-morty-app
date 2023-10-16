@@ -37,7 +37,7 @@ const CharacterCard = ({
         onClick(character);
       }}
       key={id}
-      className={`flex flex-row items-center w-50 cursor-pointer
+      className={`flex flex-col p-2 sm:p-0 sm:flex-row items-center w-50 cursor-pointer
        bg-white border border-gray-200 rounded-lg 
        shadow md:max-w-xl hover:bg-gray-100
         dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700

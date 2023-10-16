@@ -234,7 +234,7 @@ export default function Home() {
       <Button
         gradientDuoTone="greenToBlue"
         outline
-        className="absolute top-4 left-1/2 transform -translate-x-1/2"
+        className="absolute sm:top-4 top-2 left-1/2 transform -translate-x-1/2 "
         onClick={onResetButtonClick}
       >
         <p>Reset</p>
