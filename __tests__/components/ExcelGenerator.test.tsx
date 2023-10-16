@@ -1,4 +1,4 @@
-import ExcelGenerator from '@/app/components/ExcelGenerator';
+import ExcelGenerator from '@/components/ExcelGenerator';
 import { render, fireEvent, screen } from '@testing-library/react';
 import * as XLSX from 'xlsx';
 

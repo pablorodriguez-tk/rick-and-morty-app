@@ -1,4 +1,4 @@
-import EpisodeTable from '@/app/components/EpisodeTable';
+import EpisodeTable from '@/components/EpisodeTable';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 

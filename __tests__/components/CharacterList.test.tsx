@@ -1,5 +1,5 @@
-import CharacterList from '@/app/components/CharacterList';
-import type { ICharacters } from '@/app/interfaces/characters';
+import CharacterList from '@/components/CharacterList';
+import type { ICharacters } from '@/interfaces/characters';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 const characters: ICharacters[] = [

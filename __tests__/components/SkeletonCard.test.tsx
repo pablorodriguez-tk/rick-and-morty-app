@@ -1,5 +1,5 @@
+import SkeletonCard from '@/components/SkeletonCard';
 import { render, screen } from '@testing-library/react';
-import SkeletonCard from '../../src/app/components/SkeletonCard';
 
 describe('SkeletonCard', () => {
   it('renders the skeleton card', () => {

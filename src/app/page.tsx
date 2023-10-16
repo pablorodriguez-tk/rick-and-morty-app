@@ -1,22 +1,22 @@
 'use client';
 
-import { GET_CHARACTER } from './services/graphql/query/getCharacter';
+import { useGlobalContext } from '@/context/store';
+import { GET_CHARACTER } from '../services/graphql/query/getCharacter';
 import { Button, Pagination } from 'flowbite-react';
-import { useGlobalContext } from './context/store';
+import useGetEpisode from '@/hooks/useGetEpisode';
+import useGetCharacters from '@/hooks/useGetCharacters';
+import type { ICharacterResponse } from '@/interfaces/character';
 import { useLazyQuery } from '@apollo/client';
+import type { ICharacters } from '@/interfaces/characters';
 import { useEffect, useMemo } from 'react';
-import ArrowUpIcon from './svg/ArrowUpIcon';
-import CharacterList from './components/CharacterList';
-import EpisodeTable from './components/EpisodeTable';
-import FloatingButton from './components/FloatingButton';
-import ModalCharacterOnEpisodes from './components/ModalCharacterOnEpisodes';
-import Search from './components/Search';
-import Title from './components/Title';
-import type { ICharacterResponse } from './interfaces/character';
-import type { ICharacters } from './interfaces/characters';
-import useGetCharacters from './hooks/useGetCharacters';
-import useGetEpisode from './hooks/useGetEpisode';
-import ExcelGenerator from './components/ExcelGenerator';
+import Title from '@/components/Title';
+import Search from '@/components/Search';
+import CharacterList from '@/components/CharacterList';
+import ModalCharacterOnEpisodes from '@/components/ModalCharacterOnEpisodes';
+import ExcelGenerator from '@/components/ExcelGenerator';
+import EpisodeTable from '@/components/EpisodeTable';
+import FloatingButton from '@/components/FloatingButton';
+import ArrowUpIcon from '@/svg/ArrowUpIcon';
 
 export default function Home() {
   const { selectedCharacters, setSelectedCharacters } = useGlobalContext();

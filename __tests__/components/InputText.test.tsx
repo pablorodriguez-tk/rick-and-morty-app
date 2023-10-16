@@ -1,4 +1,4 @@
-import InputText from '@/app/components/InputText';
+import InputText from '@/components/InputText';
 import { render, fireEvent, screen } from '@testing-library/react';
 
 describe('InputText', () => {

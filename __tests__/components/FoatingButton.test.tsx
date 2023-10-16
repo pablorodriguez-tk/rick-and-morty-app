@@ -1,4 +1,4 @@
-import FloatingButton from '@/app/components/FloatingButton';
+import FloatingButton from '@/components/FloatingButton';
 import { render, fireEvent, screen } from '@testing-library/react';
 
 describe('FloatingButton', () => {

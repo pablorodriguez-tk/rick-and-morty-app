@@ -1,5 +1,5 @@
-import CharacterCard from '@/app/components/CharacterCard';
-import type { ICharacters, IStatus } from '@/app/interfaces/characters';
+import CharacterCard from '@/components/CharacterCard';
+import type { ICharacters, IStatus } from '@/interfaces/characters';
 import { render, screen } from '@testing-library/react';
 
 const mockCharacter: ICharacters = {

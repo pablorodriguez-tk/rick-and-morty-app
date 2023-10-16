@@ -1,5 +1,6 @@
 'use client';
 
+import type { ICharacters } from '@/interfaces/characters';
 import {
   createContext,
   useContext,
@@ -9,8 +10,6 @@ import {
   type Dispatch,
   type ReactNode,
 } from 'react';
-
-import type { ICharacters } from '../interfaces/characters';
 
 export interface DataType {
   character1: ICharacters | null;

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import Home from '@/app/page';
 import { MockedProvider } from '@apollo/client/testing';
-import { GET_CHARACTERS } from '@/app/services/graphql/query/getCaracters';
+import { GET_CHARACTERS } from '@/services/graphql/query/getCaracters';
 
 export const mocks = [
   {
