@@ -186,7 +186,7 @@ exports[`Home Home Snapshot 1`] = `
       </div>
     </div>
     <div
-      class="hidden sm:block fixed right-6 bottom-12 group"
+      class="fixed right-6 bottom-12 group"
       data-dial-init="true"
     >
       <button
