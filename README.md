@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Rick and Morty
 
-## Getting Started
+This project is a simple application that utilizes the [Rick and Morty API](https://rickandmortyapi.com/) to display two lists of characters.
 
-First, run the development server:
+Select one character from each list, and it will display the list of episodes in which both characters appear. You can also view the episodes shared between the two characters.
+
+By clicking on the episode name, you can see the complete list of characters that appear in that episode.
+
+### Images
+
+![Home Page 1](https://res.cloudinary.com/drcq2kx3u/image/upload/v1697487935/GitHub/rick-and-morty-app/awmld9d3fpcssllucuci.jpg)
+
+![Home Page 2](https://res.cloudinary.com/drcq2kx3u/image/upload/v1697487935/GitHub/rick-and-morty-app/yca4l8vnet0qokr7vnzx.jpg)
+
+![Home Page 3](https://res.cloudinary.com/drcq2kx3u/image/upload/v1697487935/GitHub/rick-and-morty-app/bymi5zqpc7h66ocgo7gl.jpg)
+
+![Mobile view](https://res.cloudinary.com/drcq2kx3u/image/upload/v1697487935/GitHub/rick-and-morty-app/h7vt1mcyzndv5sedptk9.jpg)
+
+### Getting Started
+
+Add the following to your .env.local file:
 
 ```bash
+NEXT_PUBLIC_API_URL=https://rickandmortyapi.com/graphql
+```
+
+Then, run the development server:
+
+```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Testing
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To run the tests, run the following command:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run test:watch
+```
