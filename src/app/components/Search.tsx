@@ -19,7 +19,7 @@ const Search = ({ onChange, initialValue }: SearchProps) => {
       <InputText
         name="name"
         initialValue={initialValue}
-        label="Character name"
+        label="Name"
         onChange={(e) => {
           onChange?.(e);
         }}

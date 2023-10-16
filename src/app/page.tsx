@@ -144,6 +144,7 @@ export default function Home() {
               onPageChange={(page) => {
                 setPage1(page);
               }}
+              layout="table"
             />
           </div>
         </div>
@@ -172,6 +173,7 @@ export default function Home() {
               onPageChange={(page) => {
                 setPage2(page);
               }}
+              layout="table"
             />
           </div>
         </div>

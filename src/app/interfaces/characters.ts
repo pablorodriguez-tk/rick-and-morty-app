@@ -22,8 +22,4 @@ export interface ICharacters {
   image: string;
 }
 
-export enum IStatus {
-  Alive = 'Alive',
-  Dead = 'Dead',
-  Unknown = 'unknown',
-}
+export type IStatus = 'Alive' | 'Dead' | 'unknown';

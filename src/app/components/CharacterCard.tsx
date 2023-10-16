@@ -26,12 +26,13 @@ const CharacterCard = ({
       case 'unknown':
         return 'yellow';
       default:
-        return 'default';
+        return 'purple';
     }
   };
 
   return (
     <div
+      data-testid="container-for-character-card"
       onClick={() => {
         onClick(character);
       }}
@@ -40,8 +41,7 @@ const CharacterCard = ({
        bg-white border border-gray-200 rounded-lg 
        shadow md:max-w-xl hover:bg-gray-100
         dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700
-        ${selectedCharacterId === id && 'border-green-700 border-2'}
-        `}
+        ${selectedCharacterId === id && 'border-green-700 border-2'}`}
     >
       <Image
         className="rounded-t-lg max-h-60 w-20 md:h-auto md:rounded-none md:rounded-l-lg"
@@ -56,7 +56,11 @@ const CharacterCard = ({
           {name}
         </h5>
         <div className="flex gap-2 justify-center flex-wrap">
-          <Badge color={checkStatus(status)} className="max-w-fit">
+          <Badge
+            color={checkStatus(status)}
+            className="max-w-fit"
+            data-testid="badge-for-name"
+          >
             {status}
           </Badge>
           <Badge color="purple" className="max-w-fit">

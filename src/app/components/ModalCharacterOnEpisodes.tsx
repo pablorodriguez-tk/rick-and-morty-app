@@ -28,7 +28,10 @@ const ModalCharacterOnEpisodes = ({
       <Modal.Body className="flex flex-col gap-4">
         {characters?.episode.characters.map(({ name, id, image }) => {
           return (
-            <Card key={id + name + image}>
+            <Card
+              key={id + name + image}
+              data-testid="container-for-character-card"
+            >
               <div className="flex flex-row items-center gap-4">
                 <Image
                   src={image}
