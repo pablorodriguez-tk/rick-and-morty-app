@@ -103,7 +103,8 @@ export default function Home() {
   useEffect(() => {
     if (
       selectedCharacters.character1 !== null &&
-      selectedCharacters.character2 !== null
+      selectedCharacters.character2 !== null &&
+      window.innerWidth > 640
     ) {
       window.scrollTo(0, 0);
     }
@@ -114,7 +115,7 @@ export default function Home() {
       className={`${
         selectedCharacters.character1 !== null &&
         selectedCharacters.character2 !== null
-          ? 'h-screen'
+          ? 'h-full sm:h-screen '
           : 'h-full'
       }`}
     >
@@ -202,24 +203,27 @@ export default function Home() {
               ]}
             />
           </div>
-          <div className="flex flex-row h-1/3 w-full p-4 gap-3">
+          <div className="flex flex-col h-1/3 w-full p-4 gap-3 sm:flex-row justify-center">
             <EpisodeTable
               episodeList={episodesList1?.character.episode}
               title={selectedCharacters?.character1?.name}
               secondaryTitle="Only Episodes"
               onClick={onClickGetEpisode}
+              className="order-2 sm:order-1"
             />
             <EpisodeTable
               episodeList={sharedEpisodes}
               title={`${selectedCharacters?.character1?.name} & ${selectedCharacters?.character2?.name}`}
               secondaryTitle="Shared Episodes"
               onClick={onClickGetEpisode}
+              className="order-1 sm:order-2"
             />
             <EpisodeTable
               episodeList={episodesList2?.character.episode}
               title={selectedCharacters?.character2?.name}
               secondaryTitle="Only Episodes"
               onClick={onClickGetEpisode}
+              className="order-3 sm:order-3"
             />
           </div>
         </>

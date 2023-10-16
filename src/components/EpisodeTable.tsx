@@ -8,6 +8,7 @@ interface EpisodeTableProps {
   title: string | undefined;
   secondaryTitle: string;
   onClick: (id: string) => void;
+  className?: string;
 }
 
 const EpisodeTable = ({
@@ -15,9 +16,10 @@ const EpisodeTable = ({
   title,
   secondaryTitle,
   onClick,
+  className,
 }: EpisodeTableProps) => {
   return (
-    <div className="w-1/3 flex flex-col">
+    <div className={`${className} w-full sm:w-1/3 flex flex-col`}>
       <h1 className="text-xl font-extrabold dark:text-white">{title}</h1>
       <small className="text-sm ml-2 font-semibold text-gray-500 dark:text-gray-400">
         {secondaryTitle}
