@@ -104,40 +104,16 @@ export default function Home() {
     if (
       selectedCharacters.character1 !== null &&
       selectedCharacters.character2 !== null &&
-      window.innerWidth > 640
-    ) {
-      window.scrollTo(0, 0);
-    }
-  }, [selectedCharacters]);
-
-  useEffect(() => {
-    if (
-      selectedCharacters.character1 !== null &&
-      selectedCharacters.character2 !== null &&
-      window.innerWidth <= 640 &&
       showList
     ) {
-      const element = document.getElementById('tableEpisodeToScroll');
-
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest',
-        });
-      }
+      document
+        .getElementById('tableEpisodeToScroll')
+        ?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [selectedCharacters, showList]);
 
   return (
-    <main
-      className={`${
-        selectedCharacters.character1 !== null &&
-        selectedCharacters.character2 !== null
-          ? 'h-full sm:h-screen '
-          : 'h-full'
-      }`}
-    >
+    <main className="h-full">
       <div className="flex flex-row h-2/3">
         <div className="flex flex-col w-1/2 p-4">
           <Title
