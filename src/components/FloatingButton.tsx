@@ -10,10 +10,7 @@ interface FloatingButtonProps {
 
 const FloatingButton = ({ onClick, icon, className }: FloatingButtonProps) => {
   return (
-    <div
-      data-dial-init
-      className={`hidden sm:block fixed right-6 bottom-12 group`}
-    >
+    <div data-dial-init className={`fixed right-6 bottom-12 group`}>
       <Button
         outline
         onClick={(e) => {

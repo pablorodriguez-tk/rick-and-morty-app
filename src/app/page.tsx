@@ -29,7 +29,7 @@ export default function Home() {
     search: search1,
     setSearch: setSearch1,
     setPage: setPage1,
-  } = useGetCharacters();
+  } = useGetCharacters({ listNumber: 1 });
 
   const {
     data: characterList2,
@@ -38,7 +38,7 @@ export default function Home() {
     search: search2,
     setSearch: setSearch2,
     setPage: setPage2,
-  } = useGetCharacters();
+  } = useGetCharacters({ listNumber: 2 });
 
   const [getCharacterEpisodes1, { data: episodesList1 }] =
     useLazyQuery<ICharacterResponse>(GET_CHARACTER, {
@@ -109,6 +109,25 @@ export default function Home() {
       window.scrollTo(0, 0);
     }
   }, [selectedCharacters]);
+
+  useEffect(() => {
+    if (
+      selectedCharacters.character1 !== null &&
+      selectedCharacters.character2 !== null &&
+      window.innerWidth <= 640 &&
+      showList
+    ) {
+      const element = document.getElementById('tableEpisodeToScroll');
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        });
+      }
+    }
+  }, [selectedCharacters, showList]);
 
   return (
     <main
@@ -203,7 +222,10 @@ export default function Home() {
               ]}
             />
           </div>
-          <div className="flex flex-col h-1/3 w-full p-4 gap-3 sm:flex-row justify-center">
+          <div
+            className="flex flex-col h-1/3 w-full p-4 gap-3 sm:flex-row justify-center"
+            id="tableEpisodeToScroll"
+          >
             <EpisodeTable
               episodeList={episodesList1?.character.episode}
               title={selectedCharacters?.character1?.name}
